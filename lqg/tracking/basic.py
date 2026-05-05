@@ -22,7 +22,7 @@ class TrackingTask(System):
         d = 2 * dim
         # dynamics model
         A = jnp.eye(d)
-        B = dt * linalg.block_diag(*[jnp.array([[0.0], [10.0]])] * dim)
+        B = dt * linalg.block_diag(*[jnp.array([[0.0], [10.0]])] * dim) # NOTE: why 10?
 
         # observation model
         F = jnp.eye(d)

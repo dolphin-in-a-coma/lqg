@@ -76,8 +76,9 @@ class System:
 
         Sigma0 = self.actor.V[0] @ self.actor.V[0].T if Sigma0 is None else Sigma0
 
-        gains = lqr.backward(self.actor)
         K = kf.forward(self.actor, Sigma0=Sigma0)
+        gains = lqr.backward(self.actor)
+        # K = kf.forward(self.actor, Sigma0=Sigma0)
 
         def simulate_trial(rng_key, x0=None, xhat0=None):
             """ Simulate a single trial
@@ -155,6 +156,7 @@ class System:
         # set up joint dynamical system for state and belief
         # p(x_t, xhat_t | x_{t-1}, xhat_{t-1})
 
+        # NOTE: something here that I don't understand
         # joint dynamics
         F = jnp.concatenate([
             jnp.concatenate([self.dynamics.A,
